@@ -1,25 +1,47 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Welcome from './Components/welcome/Welcome';
+import Clock from './Components/clock/Clock';
+import Contact from './Components/contact/Contact'
+import {Switch, Route } from 'react-router-dom'
+import Navigation from './Components/navigation/Navigation';
+import Error404 from './Components/error404/Error404'
+import Jeopardy from './Components/jeopardy/Jeopardy';
 
 function App() {
   return (
+
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+      <Navigation />
+      <Switch>
+        
+      <Route
+        exact path="/"
+        render={(props) => <Welcome {...props}
+          name="Giovanni" />}
+      />
+      <Route
+      exact path="/Welcome/:name"  render = {(props) => <Welcome {...props} name = {props.match.params.name}/>} 
+        
+        />
+      <Route
+      exact path= "/Clock" component = {Clock} />
+      <Route
+      exact path = "/Contact" component = {Contact} />
+
+      
+        
+        <Route 
+        exact path = "/Jeopardy" component = {Jeopardy}
+        />
+        <Route 
+        component = {Error404}
+        />
+      
+      </Switch>
     </div>
+
   );
 }
 
